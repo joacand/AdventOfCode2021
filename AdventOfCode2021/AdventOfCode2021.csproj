@@ -9,4 +9,12 @@
     <Description>Solutions for Advent of Code 2021 (https://adventofcode.com)</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Data\InputDay1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\InputDay1.txt" />
+  </ItemGroup>
+
 </Project>

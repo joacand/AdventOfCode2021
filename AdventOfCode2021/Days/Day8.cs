@@ -71,10 +71,10 @@ namespace AdventOfCode2021.Days
             {
                 switch (value.Length)
                 {
-                    case 2: decodingMap[1] = value.ToCharArray().ToList(); break;
-                    case 4: decodingMap[4] = value.ToCharArray().ToList(); break;
-                    case 3: decodingMap[7] = value.ToCharArray().ToList(); break;
-                    case 7: decodingMap[8] = value.ToCharArray().ToList(); break;
+                    case 2: decodingMap[1] = value.ToList(); break;
+                    case 4: decodingMap[4] = value.ToList(); break;
+                    case 3: decodingMap[7] = value.ToList(); break;
+                    case 7: decodingMap[8] = value.ToList(); break;
                 }
             }
         }
@@ -89,17 +89,17 @@ namespace AdventOfCode2021.Days
                 // Only a 3 intersects with 1 this way
                 if (value.Intersect(decodingMap[1]).Count() == 2)
                 {
-                    decodingMap[3] = value.ToCharArray().ToList();
+                    decodingMap[3] = value.ToList();
                 }
                 // Only a 5 intersects with 4 this way
                 else if (value.Except(decodingMap[4]).Count() == 2)
                 {
-                    decodingMap[5] = value.ToCharArray().ToList();
+                    decodingMap[5] = value.ToList();
                 }
                 // Otherwise it must be a 2 (only option left)
                 else
                 {
-                    decodingMap[2] = value.ToCharArray().ToList();
+                    decodingMap[2] = value.ToList();
                 }
             }
         }
@@ -114,17 +114,17 @@ namespace AdventOfCode2021.Days
                 // Only a 6 intersects with 1 this way
                 if (value.Intersect(decodingMap[1]).Count() == 1)
                 {
-                    decodingMap[6] = value.ToCharArray().ToList();
+                    decodingMap[6] = value.ToList();
                 }
                 // Only a 9 intersects with 4 this way
                 else if (value.Intersect(decodingMap[4]).Count() == 4)
                 {
-                    decodingMap[9] = value.ToCharArray().ToList();
+                    decodingMap[9] = value.ToList();
                 }
                 // Otherwise it must be a 0 (only option left)
                 else
                 {
-                    decodingMap[0] = value.ToCharArray().ToList();
+                    decodingMap[0] = value.ToList();
                 }
             }
         }

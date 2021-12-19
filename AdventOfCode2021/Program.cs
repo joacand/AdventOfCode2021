@@ -1,6 +1,6 @@
 ﻿using AdventOfCode2021.Days;
 
-Day14 day = new();
+Day15 day = new();
 
 Console.WriteLine(day.Solve());
 Console.ReadLine();

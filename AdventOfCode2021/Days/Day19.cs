@@ -15,8 +15,8 @@ namespace AdventOfCode2021.Days
 
             scannerCoordinator.AlignScanners();
 
-            var part1Result = scannerCoordinator.CountTotalBeacons(); ;
-            var part2Result = scannerCoordinator.FindMaxManhattanDistance(); ;
+            var part1Result = scannerCoordinator.CountTotalBeacons();
+            var part2Result = scannerCoordinator.FindMaxManhattanDistance();
 
             return $"Part 1: {part1Result}, Part 2: {part2Result}";
         }

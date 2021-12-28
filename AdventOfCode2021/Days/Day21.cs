@@ -31,6 +31,7 @@ namespace AdventOfCode2021.Days
             private IDie Die { get; }
             private int WinConditionScore { get; }
             private Dictionary<int, int> DiracRollTimes { get; } = new();
+            private Dictionary<(Player, Player, bool), (long p1wins, long p2wins)> MemoziationDict { get; } = new();
 
             public Game(Player p1, Player p2, IDie die, int winConditionScore)
             {
@@ -63,10 +64,14 @@ namespace AdventOfCode2021.Days
                 return Math.Max(p1wins, p2wins);
             }
 
-
             private (long, long) PlayDiracRecursive(Player p1, Player p2, bool p1sTurn)
             {
                 (long totalp1wins, long totalp2wins) accumulator = (0L, 0L);
+
+                if (MemoziationDict.TryGetValue((p1, p2, p1sTurn), out var cachedAccumulator))
+                {
+                    return cachedAccumulator;
+                }
 
                 foreach (var diracRoll in DiracRollTimes)
                 {
@@ -75,6 +80,7 @@ namespace AdventOfCode2021.Days
 
                     var playingPlayer = p1sTurn ? newPlayer1 : newPlayer2;
                     playingPlayer.Move(diracRoll.Key);
+
 
                     if (playingPlayer.Score >= WinConditionScore)
                     {
@@ -91,6 +97,8 @@ namespace AdventOfCode2021.Days
                             );
                     }
                 }
+
+                MemoziationDict.Add((p1, p2, p1sTurn), accumulator);
                 return accumulator;
             }
 
@@ -123,6 +131,18 @@ namespace AdventOfCode2021.Days
             {
                 Position = ((-1 + Position + steps) % 10) + 1;
                 Score += Position;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return obj is Player player &&
+                       Position == player.Position &&
+                       Score == player.Score;
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(Position, Score);
             }
         }
 

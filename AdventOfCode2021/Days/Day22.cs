@@ -87,7 +87,7 @@ namespace AdventOfCode2021.Days
 
             private void CollectCuboidOperations(Instruction instruction)
             {
-                AddOverlaps(instruction.Cube, instruction.On);
+                AddOverlaps(instruction.Cube);
 
                 if (instruction.On)
                 {
@@ -95,43 +95,23 @@ namespace AdventOfCode2021.Days
                 }
             }
 
-            private void AddOverlaps(Cube newCube, bool onInstruction)
+            private void AddOverlaps(Cube newCube)
             {
                 var addCubes = new List<Cube>();
                 var subtractCubes = new List<Cube>();
 
-                if (onInstruction)
+                foreach (var cube in CubesToAdd)
                 {
-                    foreach (var cube in CubesToAdd)
+                    if (newCube.Overlap(cube, out var overlapSpan))
                     {
-                        if (newCube.Overlap(cube, out var overlapSpan))
-                        {
-                            subtractCubes.Add(overlapSpan);
-                        }
-                    }
-                    foreach (var cube in CubesToSubtract)
-                    {
-                        if (newCube.Overlap(cube, out var overlapSpan))
-                        {
-                            addCubes.Add(overlapSpan);
-                        }
+                        subtractCubes.Add(overlapSpan);
                     }
                 }
-                else
+                foreach (var cube in CubesToSubtract)
                 {
-                    foreach (var cube in CubesToSubtract)
+                    if (newCube.Overlap(cube, out var overlapSpan))
                     {
-                        if (newCube.Overlap(cube, out var overlapSpan))
-                        {
-                            addCubes.Add(overlapSpan);
-                        }
-                    }
-                    foreach (var cube in CubesToAdd)
-                    {
-                        if (newCube.Overlap(cube, out var overlapSpan))
-                        {
-                            subtractCubes.Add(overlapSpan);
-                        }
+                        addCubes.Add(overlapSpan);
                     }
                 }
 
